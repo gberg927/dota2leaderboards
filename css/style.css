@@ -1,0 +1,67 @@
+body {
+    background: #203748;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+}
+
+table {
+    -webkit-font-smoothing: antialiased;
+    font-size: 115%;
+    width: 100%;
+}
+table th {
+    background-color: #70C469;
+    font-weight: normal;
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: left;
+}
+table td {
+    background-color: #EEEEEE;
+    padding: 20px;
+    color: #6F6F6F;
+}
+
+a {
+    color: #4682B4;
+}
+
+#header
+{
+    color: #70C469;
+}
+
+#leaderboard_status
+{
+    padding-bottom: 10px;
+}
+
+.tblPlayerName
+{
+    float: left;
+}
+
+.regionSelector{
+    padding-bottom: 10px;
+}
+
+.regionSelector a
+{
+    color: #FFFFFF;
+    font-size: 175%;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+.regionSelect .selected
+{
+    text-decoration: underline;
+    color: #4682B4;
+}
+
+.tblCountry
+{
+    float: right;
+}
