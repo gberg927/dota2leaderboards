@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'date');
 
 
 /*
@@ -111,6 +111,11 @@ $autoload['language'] = array();
 
 $autoload['model'] = array();
 
-
+/*
+| -------------------------------------------------------------------
+|  Auto-load Sparks
+| -------------------------------------------------------------------
+*/
+$autoload['sparks'] = array('curl');
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
