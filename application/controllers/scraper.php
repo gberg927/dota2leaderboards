@@ -43,7 +43,7 @@ class Scraper extends CI_Controller {
     }
     
     public function savePlayer($data) {
-        $playerID = -1;
+        $playerID = -1;        
         $this->db->select('id');
         $this->db->where('name', $data['name']);
         $query = $this->db->get('players', 1);
@@ -63,7 +63,6 @@ class Scraper extends CI_Controller {
             'rank' => $data['rank'], 
             'solo_mmr' => $data['solo_mmr']
         );
-        echo $dataHistory['date'] . "\n";
         $this->db->insert('history', $dataHistory);
     }
 }

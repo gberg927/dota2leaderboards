@@ -55,7 +55,7 @@ a {
     padding-right: 20px;
 }
 
-.regionSelect .selected
+.regionSelector.selected a
 {
     text-decoration: underline;
     color: #4682B4;
