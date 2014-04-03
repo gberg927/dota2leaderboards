@@ -4,42 +4,28 @@ class Scraper extends CI_Controller {
     
     public function index()
     {
-    }
-    
-    public function americas()
-    {
+        header('Content-type: application/json');
         $this->getRegion('americas');
-    }
-    
-    public function europe()
-    {
         $this->getRegion('europe');
-    }
-    
-    public function se_asia()
-    {
         $this->getRegion('se_asia');
-    }
-    
-    public function china()
-    {
         $this->getRegion('china');
     }
     
     private function getRegion($region)
     {
         $requestURL = 'www.dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001?division=' . $region;
-        header('Content-type: application/json');
         $leaderboards = (json_decode($this->file_get_contents_curl($requestURL)));
         foreach($leaderboards->leaderboard as $player) {
             $data = array(
-                'date' => now(),
                 'name' => $player->name,
-                'rank' => $player->rank,
+                'team_tag' => (isset($player->team_tag) ? $player->team_tag : NULL),
+                'division' => $region,
+                'country' => (isset($player->country) ? $player->country : NULL),
                 'solo_mmr' => $player->solo_mmr,
-                'country' => (isset($player->country) ? $player->country : '')
+                'rank' => $player->rank, 
             );
-            $this->db->insert($region, $data);           
+            $this->savePlayer($data);
+            //$this->db->insert($region, $data);           
         }
     }
     
@@ -54,5 +40,30 @@ class Scraper extends CI_Controller {
         curl_close($ch);
 
         return $data;
+    }
+    
+    public function savePlayer($data) {
+        $playerID = -1;
+        $this->db->select('id');
+        $this->db->where('name', $data['name']);
+        $query = $this->db->get('players', 1);
+        if ($query->num_rows() > 0) {
+            $playerID = $query->row()->id;
+            $this->db->where('id', $playerID);
+            $this->db->update('players', $data); 
+        }
+        else {
+            $this->db->insert('players', $data);
+            $playerID = $this->db->insert_id();
+        }
+        
+        $dataHistory = array(
+            'playerID' => $playerID,
+            'date' => date('Y-m-d'),
+            'rank' => $data['rank'], 
+            'solo_mmr' => $data['solo_mmr']
+        );
+        echo $dataHistory['date'] . "\n";
+        $this->db->insert('history', $dataHistory);
     }
 }
