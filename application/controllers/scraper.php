@@ -2,8 +2,7 @@
 
 class Scraper extends CI_Controller {
     
-    public function index()
-    {
+    public function index() {
         header('Content-type: application/json');
         $this->getRegion('americas');
         $this->getRegion('europe');
@@ -11,21 +10,26 @@ class Scraper extends CI_Controller {
         $this->getRegion('china');
     }
     
-    private function getRegion($region)
-    {
+    private function getRegion($region) {
         $requestURL = 'www.dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001?division=' . $region;
         $leaderboards = (json_decode($this->file_get_contents_curl($requestURL)));
+        $time_posted = date("Y-m-d H:i:s", $leaderboards->time_posted);
+        $next_scheduled_post_time = date("Y-m-d H:i:s", $leaderboards->next_scheduled_post_time);
+        
+        $timeData = array(
+            'lastUpdate' => $time_posted,
+            'nextUpdate' => $next_scheduled_post_time
+        );
+        $this->db->update('settings', $timeData); 
+        
         foreach($leaderboards->leaderboard as $player) {
             $data = array(
                 'name' => $player->name,
                 'team_tag' => (isset($player->team_tag) ? $player->team_tag : NULL),
                 'division' => $region,
-                'country' => (isset($player->country) ? $player->country : NULL),
-                'solo_mmr' => $player->solo_mmr,
-                'rank' => $player->rank, 
+                'country' => (isset($player->country) ? $player->country : NULL)
             );
-            $this->savePlayer($data);
-            //$this->db->insert($region, $data);           
+            $this->savePlayer($data, $player->solo_mmr, $player->rank, $time_posted);       
         }
     }
     
@@ -42,7 +46,7 @@ class Scraper extends CI_Controller {
         return $data;
     }
     
-    public function savePlayer($data) {
+    public function savePlayer($data, $solo_mmr, $rank, $time_posted) {
         $playerID = -1;        
         $this->db->select('id');
         $this->db->where('name', $data['name']);
@@ -59,9 +63,9 @@ class Scraper extends CI_Controller {
         
         $dataHistory = array(
             'playerID' => $playerID,
-            'date' => date('Y-m-d'),
-            'rank' => $data['rank'], 
-            'solo_mmr' => $data['solo_mmr']
+            'date' => $time_posted,
+            'rank' => $rank, 
+            'solo_mmr' => $solo_mmr
         );
         $this->db->insert('history', $dataHistory);
     }
