@@ -34,7 +34,7 @@ class Leaderboards extends CI_Controller {
         $query = $this->db->get('settings', 1);
         $lastUpdate = $query->row()->lastUpdate;
         
-        $this->db->select('history.rank, players.team_tag, players.name, players.country, history.solo_mmr');
+        $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, history.solo_mmr');
         $this->db->from('players');
         $this->db->join('history', 'history.playerID = players.id');
         $this->db->where('players.division', $region);
@@ -45,6 +45,8 @@ class Leaderboards extends CI_Controller {
         $data['region'] = $region;
         $data['players'] = $query->result();
         
-        $this->load->view('home2', $data);
+        $this->load->view('header');
+        $this->load->view('home', $data);
+        $this->load->view('footer');
     }
 }

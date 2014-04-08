@@ -50,15 +50,19 @@ a {
 .regionSelector a
 {
     color: #FFFFFF;
-    font-size: 175%;
-    text-decoration: none;
     padding-right: 20px;
 }
 
-.regionSelector.selected a
+.regionSelector a.unselected
 {
+    font-size: 125%;
+    text-decoration: none;
+}
+
+.regionSelector a.selected
+{
+    font-size: 200%;
     text-decoration: underline;
-    color: #4682B4;
 }
 
 .tblCountry
