@@ -14,5 +14,5 @@
 <body>
     <div class="container_12">
         <div class="grid_12" id="header">
-            <h1>Dota 2 Leaderboards</h1>
+            <a href="<?php echo base_url(); ?>"><h1>Dota 2 Leaderboards</h1></a>
         </div>

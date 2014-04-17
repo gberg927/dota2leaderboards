@@ -25,7 +25,7 @@ class Player extends CI_Controller {
         }
     }
     
-    public function solo_mmr($playerID) {
+    public function data($playerID) {
         if (isset($playerID)) {
             $this->db->select('date, rank, solo_mmr');
             $this->db->join('players', 'history.playerID = players.id');

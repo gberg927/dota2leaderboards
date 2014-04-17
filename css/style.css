@@ -28,9 +28,10 @@ a {
     color: #4682B4;
 }
 
-#header
+#header a
 {
     color: #70C469;
+    text-decoration: none;
 }
 
 #leaderboard_status
@@ -43,7 +44,8 @@ a {
     float: left;
 }
 
-.regionSelector{
+.regionSelector
+{
     padding-bottom: 10px;
 }
 
@@ -68,4 +70,25 @@ a {
 .tblCountry
 {
     float: right;
+}
+
+.graph-svg {
+    border: 1px #000000;
+    background-color: #ECECEC;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
 }
