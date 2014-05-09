@@ -49,4 +49,9 @@ class Leaderboards extends CI_Controller {
         $this->load->view('home', $data);
         $this->load->view('footer');
     }
+    
+    public function bootstrap()
+    {
+        $this->load->view('bootstrap');
+    }
 }
