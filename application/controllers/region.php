@@ -1,34 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Leaderboards extends CI_Controller {
+class Region extends CI_Controller {
     
-    public function index()
-    {
+    public function index() {
+        $this->load->view('includes/header');
+        $this->load->view('regions/regions');
+        $this->load->view('includes/footer');
+    }
+    
+    public function americas() {
         $this->displayRegion('americas');
     }
     
-    public function americas()
-    {
-        $this->displayRegion('americas');
-    }
-    
-    public function europe()
-    {
+    public function europe() {
         $this->displayRegion('europe');
     }
     
-    public function se_asia()
-    {
+    public function se_asia() {
         $this->displayRegion('se_asia');
     }
     
-    public function china()
-    {
+    public function china(){
         $this->displayRegion('china');
     }
     
-    private function displayRegion($region)
-    {        
+    private function displayRegion($region) {
+        $data['region'] = $region;
+        
         //Get latestUpdate Date
         $this->db->select('lastUpdate');
         $query = $this->db->get('settings', 1);
@@ -45,13 +43,8 @@ class Leaderboards extends CI_Controller {
         $data['region'] = $region;
         $data['players'] = $query->result();
         
-        $this->load->view('header');
-        $this->load->view('home', $data);
-        $this->load->view('footer');
-    }
-    
-    public function bootstrap()
-    {
-        $this->load->view('bootstrap');
+        $this->load->view('includes/header');
+        $this->load->view('regions/region', $data);
+        $this->load->view('includes/footer');
     }
 }

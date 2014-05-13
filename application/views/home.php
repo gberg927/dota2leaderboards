@@ -1,37 +1,30 @@
-<div class="grid_12 regionSelector">
-    <a href="<?php echo site_url('leaderboards/americas') ?>" <?php if ($region == 'americas') {echo 'class="selected"';} else {echo 'class="unselected"';} ?>>Americas</a>
-    <a href="<?php echo site_url('leaderboards/europe') ?>" <?php if ($region == 'europe') {echo 'class="selected"';} else {echo 'class="unselected"';} ?>>Europe</a>
-    <a href="<?php echo site_url('leaderboards/se_asia') ?>" <?php if ($region == 'se_asia') {echo 'class="selected"';} else {echo 'class="unselected"';} ?>>SE Asia</a>
-    <a href="<?php echo site_url('leaderboards/china') ?>" <?php if ($region == 'china') {echo 'class="selected"';} else {echo 'class="unselected"';} ?>>China</a>
-</div>
-<div class="grid_12">
-    <?php if (count($players) > 0) { ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Solo MMR</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($players as $player):?>
-                <tr>
-                    <td><?php echo $player->rank;?></td>
-                    <td>
-                        <?php if ($player->team_tag == NULL) { ?>
-                        <span class="tblPlayerName"><a href="<?php echo site_url('player/id/' . $player->id); ?>"><?php echo $player->name;?></a></span>
-                        <?php } else { ?>
-                            <span class="tblPlayerName"><a href="<?php echo site_url('player/id/' . $player->id); ?>"><?php echo $player->team_tag . '.' . $player->name;?></a></span>
-                        <?php } ?>
-                        <?php if ($player->country != NULL) { ?>
-                            <span class="tblCountry"><?php echo $player->country;?></span>
-                        <?php } ?>
-                    </td>
-                    <td><?php echo $player->solo_mmr;?></td>
-                </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
-    <?php } ?>
-</div>
+<div class="jumbotron">
+      <div class="container">
+        <h3>World Stats</h3>
+        <img src="<?php echo base_url() ?>images/world.png" class="img-responsive" alt="World Map">
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Americas</h2>
+                <h3><?php echo $americas['name']; ?></h3>
+                <p><a class="btn btn-default" href="<?php echo site_url('player/id/' . $americas['playerID']) ?>" role="button">Player Info &raquo;</a></p>
+            </div>
+            <div class="col-md-3">
+                <h2>Europe</h2>
+                <h3><?php echo $europe['name']; ?></h3>
+                <p><a class="btn btn-default" href="<?php echo site_url('player/id/' . $europe['playerID']) ?>" role="button">Player Info &raquo;</a></p>
+            </div>
+            <div class="col-md-3">
+                <h2>SE Asia</h2>
+                <h3><?php echo $se_asia['name']; ?></h3>
+                <p><a class="btn btn-default" href="<?php echo site_url('player/id/' . $se_asia['playerID']) ?>" role="button">Player Info &raquo;</a></p>
+            </div>
+            <div class="col-md-3">
+                <h2>China</h2>
+                <h3><?php echo $china['name']; ?></h3>
+                <p><a class="btn btn-default" href="<?php echo site_url('player/id/' . $china['playerID']) ?>" role="button">Player Info &raquo;</a></p>
+            </div>
+        </div>
