@@ -1,5 +1,5 @@
 <div class="container">
-    <h1><?php echo ucwords($region); ?></h1>
+    <h3><?php echo ucwords($region); ?></h3>
     <div class="table-responsive">
         <table id="playersTable" class="table table-bordered table-hover">
             <thead>
@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <?php foreach ($players as $player):?>
-                    <tr>
+                    <tr class="player">
                         <td><span><?php echo $player->rank;?></span></td>
                         <td>
                             <?php if ($player->team_tag == NULL) { ?>
@@ -20,7 +20,7 @@
                                 <span><a href="<?php echo site_url('player/id/' . $player->id); ?>"><?php echo $player->team_tag . '.' . $player->name;?></a></span>
                             <?php } ?>
                             <?php if ($player->country != NULL) { ?>
-                                <span ><?php echo $player->country;?></span>
+                                <img src="<?php echo base_url() . 'images/countries/' . $player->country . '.png'; ?>" class="img-responsive country" alt="<?php echo $player->country; ?>" title="<?php echo $player->country; ?>">
                             <?php } ?>
                         </td>
                         <td><span><?php echo $player->solo_mmr;?></span></td>

@@ -1,0 +1,46 @@
+.player .country {
+    float: right;
+}
+
+.superscript {
+    margin-top: -18px;
+}
+
+//CHARTS
+svg
+{
+    color: #FFFFFF;
+}
+
+svg text {
+    fill: #FFFFFF;
+    font-size: 18px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 1; 
+}
+
+.line {
+  fill: none;
+  stroke: #00BC8C;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus text {
+    fill: #FFFFFF;
+    font-size: 16px;
+}
+
+.focus circle {
+  fill: none;
+  stroke: #00BC8C;
+}
