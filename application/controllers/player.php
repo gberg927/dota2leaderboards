@@ -77,4 +77,54 @@ class Player extends CI_Controller {
             echo json_encode($playerInfo, JSON_NUMERIC_CHECK);
         }
     }
+    
+    public function getRanks($playerID) {
+        if (isset($playerID)) {
+            $this->db->select('date, rank');
+            $this->db->join('players', 'history.playerID = players.id');
+            $this->db->where('players.id', $playerID);
+            $this->db->order_by('date', 'asc'); 
+            $query = $this->db->get('history');
+            $data['ranks'] = $query->result();
+            $playerInfo = array();
+
+            foreach ($query->result() as $rank)
+            {
+                $date = date_create($rank->date);
+                $epoch = date_format($date, 'd-m-Y');
+                
+                $temp = array();
+                $temp['date'] = $epoch;
+                $temp['data'] = $rank->rank;
+                array_push($playerInfo, $temp);
+            }
+            
+            echo json_encode($playerInfo, JSON_NUMERIC_CHECK);
+        }
+    }
+    
+    public function getSolo_mmrs($playerID) {
+        if (isset($playerID)) {
+            $this->db->select('date, solo_mmr');
+            $this->db->join('players', 'history.playerID = players.id');
+            $this->db->where('players.id', $playerID);
+            $this->db->order_by('date', 'asc'); 
+            $query = $this->db->get('history');
+            $data['ranks'] = $query->result();
+            $playerInfo = array();
+
+            foreach ($query->result() as $solo_mmr)
+            {
+                $date = date_create($solo_mmr->date);
+                $epoch = date_format($date, 'd-m-Y');
+                
+                $temp = array();
+                $temp['date'] = $epoch;
+                $temp['data'] = $solo_mmr->rank;
+                array_push($playerInfo, $temp);
+            }
+            
+            echo json_encode($playerInfo, JSON_NUMERIC_CHECK);
+        }
+    }
 }
