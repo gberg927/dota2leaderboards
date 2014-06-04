@@ -4,18 +4,22 @@ class Player extends CI_Controller {
     
     public function index() {
         //Get latestUpdate Date
-        $this->db->select('lastUpdate');
+        $this->db->select('lastUpdate, nextUpdate');
         $query = $this->db->get('settings', 1);
         $lastUpdate = $query->row()->lastUpdate;
+        $nextUpdate = $query->row()->nextUpdate;
         
-        $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, players.division, history.solo_mmr');
+        $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, countries.commonName, players.division, history.solo_mmr');
         $this->db->from('players');
         $this->db->join('history', 'history.playerID = players.id');
+        $this->db->join('countries', 'countries.2LetterCode = players.country');
         $this->db->where('history.date', $lastUpdate);
         $this->db->order_by('history.rank', 'ASC'); 
         $query = $this->db->get();
         
         $data['players'] = $query->result();
+        $data['lastUpdate'] = $lastUpdate;
+        $data['nextUpdate'] = $nextUpdate;
         
         $this->load->view('includes/header');
         $this->load->view('players/players', $data);
@@ -29,8 +33,9 @@ class Player extends CI_Controller {
             $query = $this->db->get('settings', 1);
             $lastUpdate = $query->row()->lastUpdate;
             
-            $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, players.division, history.solo_mmr');
+            $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, countries.commonName, players.division, history.solo_mmr');
             $this->db->join('history', 'players.id = history.playerID');
+            $this->db->join('countries', 'countries.2LetterCode = players.country');
             $this->db->where('players.id', $playerID);
             $this->db->where('history.date', $lastUpdate);
             $query = $this->db->get('players', 1);
@@ -39,6 +44,7 @@ class Player extends CI_Controller {
             $data['team_tag'] = $query->row()->team_tag;
             $data['name'] = $query->row()->name;
             $data['country'] = $query->row()->country;
+            $data['commonName'] = $query->row()->commonName;
             $data['region'] = $query->row()->division;
             $data['solo_mmr'] = $query->row()->solo_mmr;
             

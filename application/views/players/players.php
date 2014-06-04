@@ -22,7 +22,7 @@
                             <?php } ?>
                             <?php if ($player->country != NULL) { ?>
                                 <span class="country">
-                                    <img src="<?php echo base_url() . 'images/countries/' . $player->country . '.png'; ?>" class="img-responsive country" alt="<?php echo $player->country; ?>" title="<?php echo $player->country; ?>">
+                                    <img src="<?php echo base_url() . 'images/countries/' . $player->country . '.png'; ?>" class="img-responsive country" alt="<?php echo $player->country; ?>" title="<?php echo $player->commonName; ?>">
                                 </span>
                             <?php } ?>
                         </td>
@@ -32,6 +32,17 @@
                 <?php endforeach;?>
             </tbody>
         </table>
+    </div>
+    
+    <div clas="row">
+        <div class="col-md-12">
+            <span>Last Updated: <?php echo $lastUpdate; ?></span>
+        </div>
+    </div>
+    <div clas="row">
+        <div class="col-md-12">
+            <span>Next Update: <?php echo $nextUpdate; ?></span>
+        </div>
     </div>
     <script>
         $(document).ready(function(){

@@ -6,7 +6,7 @@
                     <h1>
                         <?php if ($team_tag == NULL){echo $name;}else{echo '<small>' . $team_tag . '</small>' . $name;} ?>
                         <?php if ($country != NULL) { ?>
-                            <img class="superscript" src="<?php echo base_url() . 'images/countries/' . $country . '.png'; ?>" alt="<?php echo $country; ?>" title="<?php echo $country; ?>">
+                            <img class="superscript" src="<?php echo base_url() . 'images/countries/' . $country . '.png'; ?>" alt="<?php echo $country; ?>" title="<?php echo $commonName; ?>">
                         <?php } ?>
                     </h1>
                 </div>

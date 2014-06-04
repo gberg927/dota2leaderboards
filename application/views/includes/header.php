@@ -25,9 +25,9 @@
                 <a class="navbar-brand" href="<?php echo base_url() ?>">Dota 2 World Leaders</a>
             </div>
             <div class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" role="search">
+                <form class="navbar-form navbar-right" role="search" method="post" accept-charset="utf-8" action="<?php echo site_url('search/find'); ?>">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
