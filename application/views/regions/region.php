@@ -1,5 +1,5 @@
 <div class="container">
-    <h3><?php echo ucwords($region); ?></h3>
+    <h3><?php echo format_regions($region); ?></h3>
     <div class="table-responsive">
         <table id="playersTable" class="table table-bordered table-hover">
             <thead>

@@ -36,7 +36,7 @@ class Region extends CI_Controller {
         $this->db->select('players.id, history.rank, players.team_tag, players.name, players.country, countries.commonName, history.solo_mmr');
         $this->db->from('players');
         $this->db->join('history', 'history.playerID = players.id');
-        $this->db->join('countries', 'countries.2LetterCode = players.country');
+        $this->db->join('countries', 'countries.2LetterCode = players.country', 'inner');
         $this->db->where('players.division', $region);
         $this->db->where('history.date', $lastUpdate);
         $this->db->order_by('history.rank', 'ASC'); 
