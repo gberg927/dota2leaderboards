@@ -1,0 +1,57 @@
+.container.content {
+	margin-top: 50px;
+}
+
+.flag-icon {
+	float:right;
+}
+
+.player {
+	height: 140px;
+	padding: 10px 0px 10px 0px;
+}
+
+.player-name {
+	font-weight: bold;
+}
+
+.player-country-flag {
+	float:left;
+	height: 88px;
+}
+
+.player-info {
+	float:left;
+	height: 88px;
+	margin-top: -18px;
+	padding-left: 20px;
+}
+
+.player-data {
+	height: 120px;
+	min-width: 120px;
+	padding: 15px 15px 15px 15px;
+    color: #FFFFFF;
+    text-align: center;
+    background-color: #34495e;
+}
+
+.player-data h3 {
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:12px Arial;
+}
+
+.rank-date {
+	margin-top: 18px;
+}
