@@ -65,17 +65,17 @@ class ScraperController extends Controller
     			if ($team == null){
     				$team = new Team();
         			$team->id = $leaderboard->team_id;
-        			$team->name = isset($leaderboard->team_tag) ? $leaderboard->team_tag : NULL;
+        			$team->name = isset($leaderboard->team_tag) ? urlencode($leaderboard->team_tag) : NULL;
 	        		$team->save();
 	        		echo '<h5>New team detected</h5>';
 	        		echo '<p>' . json_encode($team, JSON_PRETTY_PRINT) . '</p>';
     			}        		
         	}
 
-        	$player = Player::where('name', '=', $leaderboard->name)->where('region_id', '=', $region->id)->first();
+        	$player = Player::where('name', '=', urlencode($leaderboard->name))->where('region_id', '=', $region->id)->first();
         	if ($player == null){
         		$player = new Player();
-        		$player->name = $leaderboard->name;
+        		$player->name = urlencode($leaderboard->name);
         		$player->region_id = $region->id;
         		$player->team_id = isset($leaderboard->team_id) ? $leaderboard->team_id : NULL;
 				$player->country = isset($leaderboard->country) ? $leaderboard->country : NULL;
